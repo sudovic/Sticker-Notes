@@ -92,9 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function makeDraggable(element) {
     let isDragging = false;
     let offsetX, offsetY;
+    const header = element.querySelector(".note-header");
 
-    element.addEventListener("mousedown", (e) => {
-      if (e.target.tagName.toLowerCase() === "input") return;
+    // Adicionar cursor move apenas ao header
+    header.style.cursor = "move";
+
+    header.addEventListener("mousedown", (e) => {
+      if (e.target.tagName.toLowerCase() === "input" || e.target.classList.contains("delete-button")) return;
       isDragging = true;
       offsetX = e.clientX - element.getBoundingClientRect().left;
       offsetY = e.clientY - element.getBoundingClientRect().top;
